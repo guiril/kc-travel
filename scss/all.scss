@@ -1,0 +1,240 @@
+@import "reset";
+@import "clearfix";
+@import "box-sizing";
+
+$gray: #F7F7F7;
+$purple: #8A82CC;
+$orange: #FFA782;
+$yellow: #F5D105;
+$blue: #559AC8;
+
+* {
+  font-family: '微軟正黑體', sans-serif;
+  color: #000;
+}
+
+body {
+  font-family: '微軟正黑體', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background:$gray;
+  color: #000;
+}
+
+h1 {
+  font-size: 40px;
+  letter-spacing: 3.89px;
+  color: #fff;
+}
+
+h2 {
+  font-size: 36px;
+  color: $purple;
+  text-align: center;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+.wrap {
+  max-width: 100%;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  @include clearfix;
+}
+
+.header {
+  padding-bottom: 30px;
+  .banner {
+    background: url(../images/banner.png) center bottom;
+    background-size: cover;
+    text-align: center;
+    padding-top: 90px;
+    padding-bottom: 65px;
+    select {
+      display: block;
+      width: 50%;
+      margin: 96px auto 80px auto;
+      padding: 10px;
+      background: rgba(255,255,255,0.70);
+      border: 3px solid #FFFFFF;
+      border-radius: 3px;
+      font-size: 18px;
+      @media (max-width: 767px) {
+        width: 80%;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .popularArea {
+    position: relative;
+    top: -35px;
+    width: 80%;
+    background: #FFFFFF;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.20);
+    border-radius: 5px;
+    margin: 0 auto 65px auto;
+    padding: 20px 26px;
+    text-align: left;
+    .title {
+      font-size: 18px;
+    }
+    input {
+      border: none;
+      border-radius: 5px;
+      padding: 10px 35px;
+      margin-left: 22px;
+      margin-top: 15px;
+      font-size: 20px;
+      color: #fff;
+      @media (max-width: 767px) {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+      }
+      &:focus {
+        outline: none;
+      }
+      &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+      }
+      &:nth-child(2) {
+        background: $purple;
+      }
+      &:nth-child(3) {
+        background: $orange;
+      }
+      &:nth-child(4) {
+        background: $yellow;
+      }
+      &:nth-child(5) {
+        background: $blue;
+      }
+    }
+  }
+  .horizontal {
+    position: relative;
+    top: -35px;
+    border-top: 1px dashed $blue;
+    .icon {
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      width: 24px;
+      height: 24px;
+      background: url(../images/icons_down.png) no-repeat center;
+      background-color: $gray;
+      border: 2px solid $blue;
+      border-radius: 50%;
+    }
+  }
+}
+
+.content {
+  padding-bottom: 20px;
+  .cardList {
+    padding-right: 40px;
+    padding-left: 40px;
+    margin-top: 24px;
+    li {
+      display: inline-block;
+      vertical-align: top;
+      width: 48%;
+      background: #FFFFFF;
+      box-shadow: 0 1px 3px 0 rgba(0,0,0,0.20);
+      margin-bottom: 36px;
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+      &:nth-child(odd) {
+        margin-right: 2%;
+      }
+      .pic {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        height: 155px;
+        >h3 {
+          position: absolute;
+          bottom: 15px;
+          left: 22px;
+          color: #fff;
+        }
+        >span {
+          position: absolute;
+          bottom: 15px;
+          right: 22px;
+          color: #fff;
+        }
+      }
+    }
+    .txt {
+      position: relative;
+      padding: 15px 22px;
+      .opentime {
+        margin-bottom: 15px;
+        >span {
+          display: inline-block;
+          background: url(../images/icons_clock.png) no-repeat center;
+          width: 18px;
+          height: 18px;
+          margin-right: 10px;
+        }
+      }
+      .address {
+        margin-bottom: 15px;
+        >span {
+          display: inline-block;
+          background: url(../images/icons_pin.png) no-repeat center;
+          width: 18px;
+          height: 20px;
+          margin-right: 10px;
+        }
+      }
+      .tel {
+        >span {
+          display: inline-block;
+          background: url(../images/icons_phone.png) no-repeat center;
+          width: 18px;
+          height: 20px;
+          margin-right: 10px;
+        }
+      }
+      .ticket {
+        position: absolute;
+        right: 22px;
+        bottom: 18px;
+        >span {
+          display: inline-block;
+          background: url(../images/icons_tag.png) no-repeat center;
+          width: 18px;
+          height: 20px;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  background: $blue;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  text-align: center;
+  font-size: 14px;
+  h4 {
+    color: #fff;
+  }
+  p {
+    color: #FFD366;
+    padding: 15px 5px;
+  }
+}
