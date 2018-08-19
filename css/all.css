@@ -112,6 +112,12 @@ h3 {
   content: "";
 }
 
+#map {
+  width: 90%;
+  height: 300px;
+  margin: 24px 5%;
+}
+
 .header {
   padding-bottom: 30px;
 }
@@ -231,7 +237,7 @@ h3 {
 .content .cardList {
   padding-right: 40px;
   padding-left: 40px;
-  margin-top: 24px;
+  margin-top: 12px;
 }
 
 .content .cardList li {
@@ -342,3 +348,4 @@ h3 {
   color: #FFD366;
   padding: 15px 5px;
 }
+/*# sourceMappingURL=all.css.map */
