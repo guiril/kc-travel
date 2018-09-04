@@ -91,6 +91,7 @@ h2 {
   font-size: 36px;
   color: #8A82CC;
   text-align: center;
+  margin-bottom: 24px;
 }
 
 h3 {
@@ -114,8 +115,31 @@ h3 {
 
 #map {
   width: 90%;
-  height: 300px;
-  margin: 24px 5%;
+  height: 350px;
+  margin: 0 5%;
+}
+
+.goTop {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+
+.goTop a {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  background: #F5D105;
+  border-radius: 50%;
+}
+
+.goTop a i {
+  display: block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  color: #fff;
+  font-size: 24px;
 }
 
 .header {
@@ -237,7 +261,7 @@ h3 {
 .content .cardList {
   padding-right: 40px;
   padding-left: 40px;
-  margin-top: 12px;
+  margin-top: 36px;
 }
 
 .content .cardList li {
@@ -332,6 +356,30 @@ h3 {
   margin-right: 10px;
 }
 
+.content .pagination {
+  text-align: center;
+}
+
+.content .pagination a {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin: 0 5px;
+}
+
+.content .pagination a.current {
+  background: #559AC8;
+  color: #fff;
+}
+
+.content .pagination a i {
+  display: block;
+  font-size: 24px;
+}
+
 .footer {
   background: #559AC8;
   padding-top: 25px;
@@ -348,4 +396,3 @@ h3 {
   color: #FFD366;
   padding: 15px 5px;
 }
-/*# sourceMappingURL=all.css.map */
