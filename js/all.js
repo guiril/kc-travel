@@ -37,7 +37,7 @@ function initMap() {
 
 // 地圖標記
 function mapMarker(lat, lng, title) {
-  var marker = new google.maps.Marker({
+  let marker = new google.maps.Marker({
     position: { lat: lat, lng: lng },
     title: title,
     map: map
@@ -59,7 +59,7 @@ function updateList(pageNumber) {
   let htmlPage = '';
 
   // 清空目前標記
-  for (var i = 0; i < markers.length; i++) {
+  for (let i = 0; i < markers.length; i++) {
     markers[i].setMap(null);
   };
   markers = [];
@@ -138,6 +138,10 @@ function getPageNumber(e) {
         pagination = currentPage + 1;
       }
     };
+
+    if (pagination == currentPage) {
+      return;
+    }
 
     updateList(pagination);
   }
