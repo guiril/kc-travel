@@ -2,4 +2,4 @@
 * Scss
 * RWD
 * JavaScript（AJAX、Google Maps API）
-* jQuery（animate()）
+* jQuery（animate）
