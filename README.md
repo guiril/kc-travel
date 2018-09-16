@@ -1,5 +1,5 @@
 # 高雄旅遊資訊
-* Scss
 * RWD
-* JavaScript（AJAX、Google Maps API）
-* jQuery（animate）
+* JavaScript 串接資料
+  * AJAX 旅遊資訊
+  * Google Maps API
