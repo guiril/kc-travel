@@ -1,160 +1,155 @@
-var allData;
-var dataArray = [];
-
-var map;
-var markers = [];
-
-var currentPage;
-var totalPage;
-
-var select = document.querySelector('#districtList');
-var title = document.querySelector('h2');
-var list = document.querySelector('.cardList');
-var popular = document.querySelector('.popularArea');
-var page = document.querySelector('.pagination');
-var addMap = document.querySelector('#map');
-
-
-// 將遠端資料存入allData
-function getData() {
-  let xhr = new XMLHttpRequest();
-  xhr.open('get', 'https://ouiis.github.io/kc_travel/json/data.json', true);
-  xhr.send(null);
-
-  xhr.onload = function () {
-    let get = JSON.parse(xhr.responseText);
-    allData = get.result.records;
+(function () {
+  const getEl = (el) => {
+    return document.querySelector(el)
   }
-};
 
-// 建立地圖
-function initMap() {
-  map = new google.maps.Map(addMap, {
-    center: { lat: 22.624815, lng: 120.301097 },
-    zoom: 11
-  });
-};
+  let allData
+  let dataArray = []
 
-// 地圖標記
-function mapMarker(lat, lng, title) {
-  let marker = new google.maps.Marker({
-    position: { lat: lat, lng: lng },
-    title: title,
-    map: map
-  })
-  // 將目前標記存入markers
-  markers.push(marker);
-};
+  let currentPage = 1
+  const pageSize = 6 // 每頁有 6 筆資料
+  let dataLength // 資料總筆數
+  let totalPage // 總頁數
 
-// 更新景點資訊
-function updateList(pageNumber) {
-  let arraySize = dataArray.length;
+  const selectArea = getEl('#districtList')
+  const titleEl = getEl('.subtitle')
+  const listEl = getEl('.card-list')
+  const popularArea = getEl('.popular-area')
+  const paginationEl = getEl('.pagination')
 
-  let pageSize = 6; // 每頁有6筆資料
-  let rangeStart = (pageNumber - 1) * pageSize;
-  let rangeEnd = pageNumber * pageSize;
-  let lastPageSize = arraySize % pageSize;
+  // 將遠端資料存入 allData
+  const getData = () => {
+    const xhr = new XMLHttpRequest() // 建立 XMLHttpReques 物件
+    xhr.open('get', 'https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97', true) // get JSON 資料
+    xhr.send(null) // 不回傳任何值
 
-  let htmlStr = '';
-  let htmlPage = '';
+    xhr.onload = function () { // 資料回傳後執行
+      const data = JSON.parse(xhr.responseText) // 把 JSON 字串轉換成物件
+      allData = data.result.records
+    }
+  }
 
-  // 清空目前標記
-  for (let i = 0; i < markers.length; i++) {
-    markers[i].setMap(null);
-  };
-  markers = [];
+  getData()
 
-  // 顯示頁碼
-  if (arraySize == 0) {
-    title.textContent = '目前尚無資料';
-    list.innerHTML = '';
-    page.innerHTML = '';
-    return;
-  } else {
-    title.textContent = dataArray[0].Zone; // 標題顯示地區
-    totalPage = Math.ceil(arraySize / pageSize); // 無條件進位計算頁數
-    for (let i = 1; i <= totalPage; i++) {
-      if (i == pageNumber) {
-        htmlPage += `<a href="#" class="page-numbers current" data-pagination=${i}>${i}</a>`;
-      } else {
-        htmlPage += `<a href="#" class="page-numbers" data-pagination=${i}>${i}</a>`;
-      }
-    };
-    page.innerHTML = `<a href="#" class="prev-button"><i class="fas fa-chevron-left" data-pagination="prev"></i></a>${htmlPage}<a href="#" class="last-button"><i class="fas fa-chevron-right" data-pagination="next"></i></a>`;
-  };
+  // 更新景點列表
+  const updateList = (pageNumber = 1) => {
+    const lastPageSize = dataLength % pageSize // 最後一頁的資料筆數
+    const indexStart = (pageNumber - 1) * pageSize // 每頁第一筆資料的索引
+    let indexEnd = (pageNumber * pageSize) - 1 // 每頁最後一筆的資料索引
 
-  // 最後一筆資料的索引
-  if (pageNumber == totalPage) {
-    if (lastPageSize != 0) {
-      rangeEnd = rangeStart + lastPageSize;
-    };
-  };
+    let listStr = ''
 
-  // 顯示資料
-  for (let i = rangeStart; i < rangeEnd; i++) {
-    htmlStr += `<li><div class="pic" style="background-image: url(${dataArray[i].Picture1});"><h3>${dataArray[i].Name}</h3><span>${dataArray[i].Zone}</span></div><div class="txt"><p class="opentime"><span></span>${dataArray[i].Opentime}</p><p class="address"><span></span>${dataArray[i].Add}</p><p class="tel"><span></span>${dataArray[i].Tel}</p><p class="ticket"><span></span>${dataArray[i].Ticketinfo}</p></div></li>`;
-    mapMarker(parseFloat(dataArray[i].Py), parseFloat(dataArray[i].Px), dataArray[i].Name);
-  };
-
-  list.innerHTML = htmlStr;
-  currentPage = pageNumber;
-};
-
-function getValue(e) {
-  e.preventDefault();
-  let district = e.target.value;
-  dataArray = [];
-
-  if (e.target.nodeName == 'INPUT' || e.target.nodeName == 'SELECT') {
-    for (let i = 0; i < allData.length; i++) {
-      if (district == allData[i].Zone) {
-        dataArray.push(allData[i]);
-      };
-    };
-  } else {
-    return;
-  };
-
-  updateList(1);
-};
-
-function getPageNumber(e) {
-  e.preventDefault();
-
-  if (e.target.nodeName == 'A' || e.target.nodeName == 'I') {
-    let pagination = e.target.dataset.pagination;
-
-    if (pagination == 'prev' || pagination == 'next') {
-      if (pagination == 'prev') {
-        if (currentPage == 1) {
-          return;
-        };
-        pagination = currentPage - 1;
-      }
-      if (pagination == 'next') {
-        if (currentPage == totalPage) {
-          return;
-        }
-        pagination = currentPage + 1;
-      }
-    };
-
-    if (pagination == currentPage) {
-      return;
+    if (dataLength === 0) {
+      titleEl.textContent = '目前尚無資料'
+      listEl.innerHTML = ''
+      return
+    } else {
+      titleEl.textContent = dataArray[0].Zone // 標題顯示地區
     }
 
-    updateList(pagination);
+    // 如果是最後一頁，最後一筆資料的索引
+    if (pageNumber === totalPage && lastPageSize !== 0) {
+      indexEnd = indexStart + lastPageSize
+    }
+
+    // 渲染資料列表
+    for (let i = indexStart; i <= indexEnd; i++) {
+      listStr += `
+        <li>
+          <div class="card-pic" style="background-image: url(${dataArray[i].Picture1});">
+            <h3>${dataArray[i].Name}</h3>
+            <span>${dataArray[i].Zone}</span>
+          </div>
+          <ul class="card-txt">
+            <li title="${dataArray[i].Opentime}"><img src="images/icons_clock.png">${dataArray[i].Opentime}</li>
+            <li><img src="images/icons_pin.png">${dataArray[i].Add}</li>
+            <li><img src="images/icons_phone.png">${dataArray[i].Tel}</li>
+            <li><img src="images/icons_tag.png">${dataArray[i].Ticketinfo}</li>
+          </ul>
+        </li>`
+    }
+
+    listEl.innerHTML = listStr
+    currentPage = pageNumber
   }
-};
 
-$('.goTop a').click(function (e) {
-  e.preventDefault();
-  $('html, body').animate({
-    scrollTop: 0
-  }, 800);
-})
+  // 渲染頁碼
+  const renderPagination = (page) => {
+    let pageStr = ''
 
-getData();
-select.addEventListener('change', getValue, false);
-popular.addEventListener('click', getValue, false);
-page.addEventListener('click', getPageNumber, true);
+    dataLength = dataArray.length
+    totalPage = Math.ceil(dataLength / pageSize) // 無條件進位計算頁數
+
+    if (dataLength === 0) {
+      paginationEl.innerHTML = ''
+    } else {
+      for (let i = 1; i <= totalPage; i++) {
+        if (i === page) {
+          pageStr += `<a href="#" class="page-numbers active" data-page=${i}>${i}</a>`
+        } else {
+          pageStr += `<a href="#" class="page-numbers" data-page=${i}>${i}</a>`
+        }
+      }
+      if (currentPage === 1) {
+        paginationEl.innerHTML = `
+        <a href="#" class="disabled" data-page="prev">< prev</a>
+        ${pageStr}
+        <a href="#" data-page="next">next ></a>`
+      } else if (currentPage === totalPage) {
+        paginationEl.innerHTML = `
+        <a href="#" data-page="prev">< prev</a>
+        ${pageStr}
+        <a href="#" class="disabled" data-page="next">next ></a>`
+      }
+    }
+  }
+
+  // 目前選擇的地區
+  const getValue = (e) => {
+    e.preventDefault()
+    const district = e.target.value
+    dataArray = []
+
+    if (district) {
+      for (let i = 0; i < allData.length; i++) {
+        if (district === allData[i].Zone) {
+          dataArray.push(allData[i])
+        }
+      }
+      renderPagination(currentPage)
+      updateList()
+    }
+  }
+
+  const getPageNumber = (e) => {
+    e.preventDefault()
+
+    let page
+
+    if (e.target.nodeName === 'A') { // 點擊到 a 元素取得目前點擊的頁碼
+      page = e.target.dataset.page
+      if (page === 'prev' || page === 'next') { // 點擊到 prev 或 next 時
+        if (page === 'prev' && currentPage !== 1) {
+          currentPage = currentPage - 1
+        } else if (page === 'next' && currentPage !== totalPage) {
+          currentPage = currentPage + 1
+        }
+      } else {
+        currentPage = Number(page)
+      }
+      renderPagination(currentPage)
+      updateList(currentPage)
+    }
+  }
+
+  $('.go-top a').click(function (e) {
+    e.preventDefault()
+    $('html, body').animate({
+      scrollTop: 0
+    }, 800)
+  })
+
+  selectArea.addEventListener('change', getValue, false)
+  popularArea.addEventListener('click', getValue, false)
+  paginationEl.addEventListener('click', getPageNumber, false)
+})()

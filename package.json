@@ -1,0 +1,27 @@
+{
+  "name": "kc_travel",
+  "version": "1.0.0",
+  "description": "* RWD * JavaScript 串接資料   * 透過 AJAX 接收 JSON 資料   * Google Maps API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ouiis/kc_travel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ouiis/kc_travel/issues"
+  },
+  "homepage": "https://github.com/ouiis/kc_travel#readme",
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}

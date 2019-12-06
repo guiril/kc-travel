@@ -1,289 +1,275 @@
-@import "reset";
-@import "clearfix";
-@import "box-sizing";
+@import 'mixins/reset';
+@import 'mixins/reboot';
+@import 'mixins/clearfix';
 
-$gray: #F7F7F7;
-$purple: #8A82CC;
-$orange: #FFA782;
-$yellow: #F5D105;
-$blue: #559AC8;
+@import 'helpers/variables';
 
-* {
-  font-family: '微軟正黑體', sans-serif;
-  color: #000;
-}
-
-body {
-  font-family: '微軟正黑體', sans-serif;
+html, body {
   font-size: 16px;
-  line-height: 1.5;
-  background:$gray;
-  color: #000;
+  font-family: $font-famliy;
+  color: #000000;
+  background-color: $gray-color;
 }
 
-h1 {
+.wrap {
+  min-width: 1024px;
+}
+
+.container {
+  width: 1024px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.page-title {
   font-size: 40px;
-  letter-spacing: 3.89px;
-  color: #fff;
-}
-
-h2 {
-  font-size: 36px;
-  color: $purple;
   text-align: center;
-  margin-bottom: 24px;
+  letter-spacing: 3.89px;
+  color: $white-color;
 }
 
 h3 {
   font-size: 24px;
 }
 
-.wrap {
-  max-width: 100%;
-}
-
-.container {
-  max-width: 1024px;
-  margin: 0 auto;
-  @include clearfix;
-}
-
-#map {
-  width: 90%;
-  height: 350px;
-  margin: 0 5%; 
-}
-
-.goTop {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  a {
-    display: block;
-    
-    text-align: center;
-    font-weight: bold;
-    background: $yellow;
-    border-radius: 50%;
-    i {
-      display: block;
-      width: 50px;
-      height: 50px;
-      line-height: 50px;
-      color: #fff;
-      font-size: 24px;
-    }
-  }
-}
-
 .header {
-  padding-bottom: 30px;
-  .banner {
-    background: url(../images/banner.png) center bottom;
-    background-size: cover;
-    text-align: center;
-    padding-top: 90px;
-    padding-bottom: 65px;
-    select {
-      display: block;
-      width: 50%;
-      margin: 96px auto 80px auto;
-      padding: 10px;
-      background: rgba(255,255,255,0.70);
-      border: 3px solid #FFFFFF;
-      border-radius: 3px;
-      font-size: 18px;
-      @media (max-width: 767px) {
-        width: 80%;
-      }
-      &:focus {
-        outline: none;
-      }
+  position: relative;
+  height: 380px;
+  padding-top: 89px;
+  padding-bottom: 107px;
+  background-image: url(../images/banner.png);
+  background-size: cover;
+  background-position: center bottom;
+  #districtList {
+    display: block;
+    width: 452px;
+    height: 48px;
+    padding: 10px;
+    margin: 96px auto 0 auto;
+    font-size: 18px;
+    background: rgba($white-color, .70);
+    border: 3px solid $white-color;
+    border-radius: 3px;
+    &:focus {
+      outline: none;
     }
   }
-  .popularArea {
-    position: relative;
-    top: -35px;
-    width: 80%;
-    background: #FFFFFF;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.20);
+  .popular-area {
+    width: 800px;
+    height: 112px;
+    position: absolute;
+    bottom: -84px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 20px;
+    padding-left: 26px;
+    background-color: $white-color;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .20);
     border-radius: 5px;
-    margin: 0 auto 65px auto;
-    padding: 20px 26px;
     text-align: left;
-    .title {
+    .popular-area-title {
       font-size: 18px;
+      text-align: left;
     }
-    input {
-      border: none;
-      border-radius: 5px;
-      padding: 10px 35px;
-      margin-left: 22px;
-      margin-top: 15px;
+    .popular-area-list {
+      margin-top: 14px;
+      font-size: 0;
+      li {
+        display: inline-block;
+        width: 130px;
+        height: 42px;
+        margin-right: 23px;
+        &:first-child {
+          .popular-area-btn {
+            background-color: $purple-color;
+          }
+        }
+        &:nth-child(2) {
+          .popular-area-btn {
+            background-color: $orange-color;
+          }
+        }
+        &:nth-child(3) {
+          .popular-area-btn {
+            background-color: $yellow-color;
+          }
+        }
+        &:last-child {
+          margin-right: 0;
+          .popular-area-btn {
+            background-color: $blue-color;
+          }
+        }
+      }
+    }
+    .popular-area-btn {
+      width: 100%;
+      height: 100%;
       font-size: 20px;
-      color: #fff;
-      @media (max-width: 767px) {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-      }
-      &:focus {
-        outline: none;
-      }
+      color: $white-color;
+      border-radius: 5px;
       &:hover {
         opacity: 0.8;
-        cursor: pointer;
       }
-      &:nth-child(2) {
-        background: $purple;
-      }
-      &:nth-child(3) {
-        background: $orange;
-      }
-      &:nth-child(4) {
-        background: $yellow;
-      }
-      &:nth-child(5) {
-        background: $blue;
-      }
-    }
-  }
-  .horizontal {
-    position: relative;
-    top: -35px;
-    border-top: 1px dashed $blue;
-    .icon {
-      position: absolute;
-      top: -9px;
-      left: 50%;
-      width: 24px;
-      height: 24px;
-      background: url(../images/icons_down.png) no-repeat center;
-      background-color: $gray;
-      border: 2px solid $blue;
-      border-radius: 50%;
     }
   }
 }
 
 .content {
+  padding-top: 135px;
   padding-bottom: 20px;
-  .cardList {
-    padding-right: 40px;
-    padding-left: 40px;
-    margin-top: 36px;
-    li {
-      display: inline-block;
-      vertical-align: top;
-      width: 48%;
-      background: #FFFFFF;
-      box-shadow: 0 1px 3px 0 rgba(0,0,0,0.20);
-      margin-bottom: 36px;
-      @media (max-width: 767px) {
-        width: 100%;
-      }
-      &:nth-child(odd) {
-        margin-right: 2%;
-      }
-      .pic {
-        position: relative;
-        background-size: cover;
-        background-position: center;
-        height: 155px;
-        >h3 {
-          position: absolute;
-          bottom: 15px;
-          left: 22px;
-          color: #fff;
-        }
-        >span {
-          position: absolute;
-          bottom: 15px;
-          right: 22px;
-          color: #fff;
-        }
-      }
+  .subtitle {
+    margin-top: 76px;
+    font-size: 36px;
+    text-align: center;
+    color: $purple-color;
+  }
+}
+
+.horizontal {
+  position: relative;
+  border-top: 1px dashed $blue-color;
+  &:after {
+    content: '';
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    background-color: $gray-color;
+    background-image: url(../images/icons_down.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: 2px solid $blue-color;
+    border-radius: 50%;
+  }
+}
+
+.card-list {
+  padding-right: 40px;
+  padding-left: 40px;
+  margin-top: 24px;
+  font-size: 0;
+  > li {
+    width: calc((100% - 16px) / 2);
+    height: 273px;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 36px;
+    font-size: 16px;
+    background-color: $white-color;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .20);
+    &:nth-child(odd) {
+      margin-right: 16px;
     }
-    .txt {
+    .card-pic {
+      height: 155px;
       position: relative;
-      padding: 15px 22px;
-      .opentime {
-        margin-bottom: 15px;
-        >span {
-          display: inline-block;
-          background: url(../images/icons_clock.png) no-repeat center;
-          width: 18px;
-          height: 18px;
-          margin-right: 10px;
-        }
-      }
-      .address {
-        margin-bottom: 15px;
-        >span {
-          display: inline-block;
-          background: url(../images/icons_pin.png) no-repeat center;
-          width: 18px;
-          height: 20px;
-          margin-right: 10px;
-        }
-      }
-      .tel {
-        >span {
-          display: inline-block;
-          background: url(../images/icons_phone.png) no-repeat center;
-          width: 18px;
-          height: 20px;
-          margin-right: 10px;
-        }
-      }
-      .ticket {
+      background-size: cover;
+      background-position: center;
+      h3, span {
         position: absolute;
-        right: 22px;
-        bottom: 18px;
-        >span {
-          display: inline-block;
-          background: url(../images/icons_tag.png) no-repeat center;
-          width: 18px;
-          height: 20px;
-          margin-right: 10px;
-        }
+        bottom: 15px;
+        color: $white-color;
+      }
+      h3 {
+        left: 22px;
+        font-size: 24px;
+      }
+      span {
+        right: 24px;
       }
     }
   }
-  .pagination {
-    text-align: center;
-    a {
-      display: inline-block;
-      width: 24px;
-      height: 24px;
-      line-height: 24px;
-      border-radius: 50%;
-      vertical-align: middle;
-      margin: 0 5px;
-      &.current {
-        background: $blue;
-        color: #fff;
+  .card-txt {
+    position: relative;
+    padding: 15px 22px;
+    li {
+      position: relative;
+      margin-top: 15px;
+      color: #000000;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: left center;
+      overflow: hidden;
+      text-overflow: ellipsis; 
+      white-space: nowrap;
+      img {
+        height: 18px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
       }
-      i {
-        display: block;
-        font-size: 24px;
+      &:first-child {
+        margin-top: 0;
+      }
+      &:last-child {
+        height: 20px;
+        position: absolute;
+        right: 24px;
+        bottom: 15px;
       }
     }
   }
 }
 
+.pagination {
+  text-align: center;
+  a {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 12px;
+    font-size: 14px;
+    color: #4A4A4A;
+    &:first-child {
+      margin-right: 10px;
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-left: 10px;
+      margin-right: 0;
+    }
+    &.disabled {
+      color: rgba(74, 74, 74, .50);
+      cursor: default;
+    }
+    &:not(.disabled) {
+      &:hover {
+        color: $blue-color;
+      }
+    }
+    &.active {
+      color: $blue-color;
+    }
+  }
+}
+
 .footer {
-  background: $blue;
+  height: 90px;
   padding-top: 25px;
   padding-bottom: 25px;
-  text-align: center;
   font-size: 14px;
+  text-align: center;
+  background-color: $blue-color;
   h4 {
-    color: #fff;
+    color: $white-color;
   }
   p {
     color: #FFD366;
     padding: 15px 5px;
+  }
+}
+
+.go-top{
+  position: fixed;
+  right: 28px;
+  bottom: 106px;
+  a {
+    width: 24px;
+    height: 24px;
+    display: block;
+    img {
+      display: block;
+    }
   }
 }
