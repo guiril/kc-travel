@@ -3,6 +3,7 @@
 六角學院【JavaScript 入門篇 - 學徒的試煉】最終作業
 
 [標示文件](https://hexschool.github.io/JavaScript_HomeWork/#artboard3)
+
 [旅遊景點來源：高雄市政府資料開放平台](https://data.kcg.gov.tw/dataset/attractions-information)
 
 ### 功能介紹
@@ -22,7 +23,7 @@
 ### 更新紀錄
 
 * 2019/12/4
-  * eslint --init，使用 JavaScript Standard Style
+  * `$ eslint --init`，使用 JavaScript Standard Style
   * 使用 ECMAScript 2015 (ES6) 語法
   * 刪除 Google Maps API
 
