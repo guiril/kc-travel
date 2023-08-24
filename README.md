@@ -2,7 +2,7 @@
 
 六角學院【JavaScript 入門篇 - 學徒的試煉】最終作業
 
-[標示文件](https://hexschool.github.io/JavaScript_HomeWork/#artboard3)
+[View the UI design mockup](https://hexschool.github.io/JavaScript_HomeWork/#artboard3)
 
 [旅遊景點來源：高雄市政府資料開放平台](https://data.kcg.gov.tw/dataset/attractions-information)
 
